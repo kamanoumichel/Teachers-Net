@@ -1,0 +1,21 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Blog|Page{% endblock %}
+{% block content %}
+    <h1 style="margin-bottom: 15px;">Blog ({{toto|length}} posts)</h1>
+    
+        {% for u in toto %}
+        <article>
+            <h2 class="title">
+                <a href="{% url 'poste' u.id %}" style="color: #1ce; text-decoration: none;">{{u.id}}-{{u.title|upper}}</a>
+            </h2>
+            <p class="time">🕐Posted: {{u.created_at|date:'d-m-y'}}</p>
+            <p class="time">⏰Published: {{u.created_at|timesince}} ago</p>
+            <p>{{u.body| truncatewords:3}}</p>
+            <a href="{% url 'poste' u.id %}">En savoir plus!</a>
+        </article>    
+        {% empty %}
+            <p>Pas de post dispo!</p>   
+        {% endfor %}     
+    
+
+{% endblock %}
